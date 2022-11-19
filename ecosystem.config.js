@@ -1,10 +1,9 @@
 module.exports = {
   apps : [{
     name: 'index',
-    script: 'index.js',
-    watch: '.',
-    instances: 'max',
-    exec_mode: 'cluster'
+    script: './index.js',
+    instances: '0',
+    exec_mode: 'cluster',
   }],
 
   deploy : {

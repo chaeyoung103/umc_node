@@ -24,9 +24,9 @@ const {emit} = require("nodemon");
 exports.postUsers = async function (req, res) {
 
     /**
-     * Body: email, password, nickname
+     * Body: email, password, name, nickName, phoneNumber, alarmAgreement, marketingAlarmAgreement
      */
-    const {email, password, nickname} = req.body;
+    const {email, password, name, nickName, phoneNumber, alarmAgreement, marketingAlarmAgreement} = req.body;
 
     // 빈 값 체크
     if (!email)
@@ -46,7 +46,11 @@ exports.postUsers = async function (req, res) {
     const signUpResponse = await userService.createUser(
         email,
         password,
-        nickname
+        name,
+        nickName, 
+        phoneNumber, 
+        alarmAgreement, 
+        marketingAlarmAgreement
     );
 
     return res.send(signUpResponse);
@@ -132,7 +136,7 @@ exports.patchUsers = async function (req, res) {
     if (userIdFromJWT != userId) {
         res.send(errResponse(baseResponse.USER_ID_NOT_MATCH));
     } else {
-        if (!nickname) return res.send(errResponse(baseResponse.USER_NICKNAME_EMPTY));
+        if (!nickName) return res.send(errResponse(baseResponse.USER_NICKNAME_EMPTY));
 
         const editUserInfo = await userService.editUser(userId, nickname)
         return res.send(editUserInfo);
