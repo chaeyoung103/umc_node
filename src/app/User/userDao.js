@@ -46,16 +46,17 @@ async function insertUserInfo(connection, insertUserInfoParams) {
 
 // 패스워드 체크
 async function selectUserPassword(connection, selectUserPasswordParams) {
+  console.log(selectUserPasswordParams)
   const selectUserPasswordQuery = `
-        SELECT email, nickName, password
+        SELECT User.password
         FROM User
-        WHERE email = ? AND password = ?;`;
+        WHERE User.email = ? AND User.password = ?;
+        `;
   const selectUserPasswordRow = await connection.query(
       selectUserPasswordQuery,
       selectUserPasswordParams
   );
-
-  return selectUserPasswordRow;
+  return selectUserPasswordRow[0];
 }
 
 // 유저 계정 상태 체크 (jwt 생성 위해 id 값도 가져온다.)
@@ -71,6 +72,7 @@ async function selectUserAccount(connection, email) {
   return selectUserAccountRow[0];
 }
 
+// 유저 정보 수정
 async function updateUserInfo(connection, id, nickname) {
   const updateUserQuery = `
   UPDATE User

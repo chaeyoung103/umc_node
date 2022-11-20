@@ -38,3 +38,18 @@ exports.createRestaurant = async function (
         return errResponse(baseResponse.DB_ERROR);
     }
 };
+
+exports.editRestaurant = async function (id, name, category) {
+    try {
+        console.log(id)
+        const connection = await pool.getConnection(async (conn) => conn);
+        const editRestaurantResult = await restaurantDao.updateRestaurantInfo(connection, id, name, category)
+        connection.release();
+
+        return response(baseResponse.SUCCESS);
+
+    } catch (err) {
+        logger.error(`App - editRestaurant Service error\n: ${err.message}`);
+        return errResponse(baseResponse.DB_ERROR);
+    }
+}

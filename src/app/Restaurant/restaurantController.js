@@ -61,3 +61,25 @@ exports.getRestaurantById = async function (req, res) {
     const restaurantByUserId = await restaurantProvider.retrieveRestaurant(restaurantId);
     return res.send(response(baseResponse.SUCCESS, restaurantByUserId));
 };
+
+/**
+ * API No. 4
+ * API Name : 식당 정보 수정 API
+ * [PATCH] /app/restaurants/:restaurantId
+ * path variable : restaurantId
+ * body : name, category
+ */
+ exports.patchRestaurants = async function (req, res) {
+
+    // jwt - restaurantId, path variable :restaurantId
+
+    const restaurantId = req.params.restaurantId;
+    const name = req.body.name;
+    const category = req.body.category;
+
+
+    if (!name) return res.send(errResponse(baseResponse.USER_NICKNAME_EMPTY));
+
+    const editRestaurantInfo = await restaurantService.editRestaurant(restaurantId, name, category)
+    return res.send(editRestaurantInfo);
+};

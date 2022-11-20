@@ -46,7 +46,7 @@ exports.passwordCheck = async function (selectUserPasswordParams) {
       selectUserPasswordParams
   );
   connection.release();
-  return passwordCheckResult[0];
+  return passwordCheckResult;
 };
 
 exports.accountCheck = async function (email) {

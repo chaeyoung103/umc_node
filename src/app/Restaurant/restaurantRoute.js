@@ -9,4 +9,7 @@ module.exports = function(app){
 
     // 3. 특정 식당 조회 API
     app.get('/app/restaurants/:restaurantId', restaurant.getRestaurantById);
+
+    // 4. 식당 정보 수정 API
+    app.patch('/app/restaurants/:restaurantId', restaurant.patchRestaurants);
 }

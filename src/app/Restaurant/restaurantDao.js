@@ -19,7 +19,7 @@ async function selectRestaurant(connection) {
     return restaurantRow;
     }
   
-  // 유저 생성
+  // 식당 생성
   async function insertRestaurantInfo(connection, insertRestaurantInfoParams) {
     const insertRestaurantInfoQuery = `
           INSERT INTO Restaurant(name, category, address, deliveryTime, deliveryCost, minimumCost)
@@ -33,8 +33,19 @@ async function selectRestaurant(connection) {
     return insertRestaurantInfoRow;
   }
 
+  //식당 정보 수정
+  async function updateRestaurantInfo(connection, id, name, category) {
+    const updateRestaurantQuery = `
+    UPDATE Restaurant
+    SET name = ? , category = ?
+    WHERE restaurantIdx = ?;`;
+    const updateRestaurantRow = await connection.query(updateRestaurantQuery, [name, category, id]);
+    return updateRestaurantRow[0];
+  }
+
   module.exports = {
     selectRestaurant,
     selectRestaurantId,
-    insertRestaurantInfo
+    insertRestaurantInfo,
+    updateRestaurantInfo
   };
