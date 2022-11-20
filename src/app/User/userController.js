@@ -131,24 +131,17 @@ exports.patchUsers = async function (req, res) {
     const userIdFromJWT = req.verifiedToken.userId
 
     const userId = req.params.userId;
-    const nickname = req.body.nickname;
+    const nickName = req.body.nickName;
 
     if (userIdFromJWT != userId) {
         res.send(errResponse(baseResponse.USER_ID_NOT_MATCH));
     } else {
         if (!nickName) return res.send(errResponse(baseResponse.USER_NICKNAME_EMPTY));
 
-        const editUserInfo = await userService.editUser(userId, nickname)
+        const editUserInfo = await userService.editUser(userId, nickName)
         return res.send(editUserInfo);
     }
 };
-
-
-
-
-
-
-
 
 
 
