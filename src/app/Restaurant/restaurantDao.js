@@ -43,9 +43,21 @@ async function selectRestaurant(connection) {
     return updateRestaurantRow[0];
   }
 
+  //식당 삭제
+  async function deleteRestaurant(connection, id) {
+    const deleteRestaurantQuery = `
+    DELETE
+    FROM Restaurant
+    WHERE restaurantIdx = ?;`;
+    const [deleteRestaurantRow] = await connection.query(deleteRestaurantQuery, id);
+    
+    return deleteRestaurantRow;
+  }
+
   module.exports = {
     selectRestaurant,
     selectRestaurantId,
     insertRestaurantInfo,
-    updateRestaurantInfo
+    updateRestaurantInfo,
+    deleteRestaurant
   };

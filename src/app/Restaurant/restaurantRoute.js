@@ -12,4 +12,7 @@ module.exports = function(app){
 
     // 4. 식당 정보 수정 API
     app.patch('/app/restaurants/:restaurantId', restaurant.patchRestaurants);
+
+    // 5. 식당 삭제 API
+    app.delete('/app/restaurants/:restaurantId', restaurant.deleteRestaurant);
 }

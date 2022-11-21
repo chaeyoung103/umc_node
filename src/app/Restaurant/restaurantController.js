@@ -83,3 +83,19 @@ exports.getRestaurantById = async function (req, res) {
     const editRestaurantInfo = await restaurantService.editRestaurant(restaurantId, name, category)
     return res.send(editRestaurantInfo);
 };
+
+/**
+ * API No. 5
+ * API Name : 식당 삭제 API
+ * [PATCH] /app/restaurants/:restaurantId
+ * path variable : restaurantId
+ */
+ exports.deleteRestaurant = async function (req, res) {
+
+    const restaurantId = req.params.restaurantId;
+
+    if (!restaurantId) return res.send(errResponse(baseResponse.RESTAURANT_RESTAURANTID_EMPTY));
+
+    const restaurantDeleteResponse = await restaurantService.deleteRestaurant(restaurantId)
+    return res.send(restaurantDeleteResponse);
+};

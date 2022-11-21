@@ -53,3 +53,18 @@ exports.editRestaurant = async function (id, name, category) {
         return errResponse(baseResponse.DB_ERROR);
     }
 }
+
+exports.deleteRestaurant = async function (id) {
+    try {
+        console.log(id)
+        const connection = await pool.getConnection(async (conn) => conn);
+        const deleteRestaurantResult = await restaurantDao.deleteRestaurant(connection, id)
+        connection.release();
+
+        return response(baseResponse.SUCCESS);
+
+    } catch (err) {
+        logger.error(`App - deleteRestaurant Service error\n: ${err.message}`);
+        return errResponse(baseResponse.DB_ERROR);
+    }
+}
